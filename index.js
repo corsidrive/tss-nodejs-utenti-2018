@@ -1,13 +1,42 @@
 const express = require('express')
 const path = require('path')
 const PORT = process.env.PORT || 5000
+const mongojs = require('mongojs');
+//tss-formarete:tss-2018@ds247499.mlab.com:47499/tss-formarete'
+//tss-2018
+//var db = mongojs('mongodb://ds247499.mlab.com:47499/tss-formarete');
+var db = mongojs('tss-formarete:tss-2018@ds247499.mlab.com:47499/tss-formarete');
+//var db = mongojs('localhost:27017/palazzo_madama');
 
-express()
+db.on('error', function(error) {
+  console.log('we had an error.');
+});
+console.log('------------------------');  
+
+express() 
   .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
-  .get('/', (req, res) => res.json({a:"b"}))
+
+ 
+  .get('/utenti', (req, res) => {
+                          console.log(db.utenti);
+
+                          db.utenti.find({},function(err,utenti){
+                                console.log(utenti);
+                                res.json(utenti)
+                          });
+
+                          }
+
+  )
+
+
+
+
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
  
 
   ///mongodb://<dbuser>:<dbpassword>@ds247499.mlab.com:47499/tss-formarete
+
+  

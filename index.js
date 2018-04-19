@@ -22,6 +22,13 @@ express()
   .get('/utenti', (req, res) => {
                           console.log(db.utenti);
 
+                          res.writeHead(200, {
+                            'Content-Type': 'text/plain',
+                            'Access-Control-Allow-Origin' : '*',
+                            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+                          });
+
+
                           db.utenti.find({},function(err,utenti){
                                 console.log(utenti);
                                 res.json(utenti)

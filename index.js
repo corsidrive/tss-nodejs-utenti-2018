@@ -33,11 +33,12 @@ app.get('/utenti', (req, res) => {
  
 app.post('/utenti', (req, res) => {
                         res.set(responseHeader);
+
                         let utente = req.body;
 
-                        db.utenti.insert({},function(err,utente){
-                              console.log(utente);
-                              res.json(utente)
+                        db.utenti.insert(utente,function(err,queryresult){
+                              console.log("response of post",queryresult);
+                              res.json({"insert":true})
                         }); 
 
 });

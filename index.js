@@ -8,7 +8,7 @@ const bodyParser = require('body-parser');
 const responseHeader = {
   'Content-Type': 'application/json',
   'Access-Control-Allow-Origin' : '*',
-  'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE'
+  'Access-Control-Allow-Methods': 'PUT,POST,DELETE'
 }
 
 var db = mongojs('tss-formarete:tss-2018@ds247499.mlab.com:47499/tss-formarete');

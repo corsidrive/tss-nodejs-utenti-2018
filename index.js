@@ -20,12 +20,12 @@ db.on('error', function(error) {
 var app = express();
 
 app.use(bodyParser.json());
-//app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get('/utenti', (req, res) => {
                           res.set(responseHeader)
                          
-                          db.utenti.find({},function(err,utenti){
+                          db.utenti.find({}).sort({firstName:1},function(err,utenti){
                                 console.log(utenti);
                                 res.json(utenti)
                           });
@@ -37,8 +37,13 @@ app.post('/utenti', (req, res) => {
                         let utente = req.body;
 
                         db.utenti.insert(utente,function(err,queryresult){
-                              console.log("response of post",queryresult);
-                              res.json({"insert":true})
+
+                              console.log("response of post",utente,queryresult);
+                              console.log("-----------------------------------");
+                              
+                             
+                              
+                              res.json(queryresult)
                         }); 
 
 });

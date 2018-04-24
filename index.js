@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/utenti', (req, res) => {
                           res.set(responseHeader)
                          
-                          db.utenti.find({})
-                                   .sort({firstName:-1},
+                          db.utenti.find({},{ firstName: 1, lastName: 1 })
+                                   .sort({firstName:1},
                                     function(err,utenti){
                                                         console.log(utenti);
                                                         res.json(utenti)
@@ -37,7 +37,7 @@ app.post('/utenti', (req, res) => {
                         res.set(responseHeader);
 
                         let utente = req.body;
-
+ 
                         db.utenti.insert(utente,
                                         function(err,queryresult){
 

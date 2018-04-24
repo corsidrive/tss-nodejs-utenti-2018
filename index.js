@@ -25,8 +25,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.get('/utenti', (req, res) => {
                           res.set(responseHeader)
                          
-                          db.utenti.find({},{ firstName: 1, lastName: 1 })
-                                   .sort({firstName:1},
+                          db.utenti.find({firstName:"roby"},
+                                    { firstName: 1, lastName: 1 })
+                                   .sort({firstName:1,lastName:1},
                                     function(err,utenti){
                                                         console.log(utenti);
                                                         res.json(utenti)
